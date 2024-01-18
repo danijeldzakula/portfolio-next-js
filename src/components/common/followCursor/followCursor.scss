@@ -1,0 +1,52 @@
+@import '../../../sass/helpers/mixins';
+//* follow cursor default options
+.cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	//* Pointer events none functional
+	pointer-events: none;
+	transform-origin: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	will-change: transform;
+	//* Z-INDEX Cursor
+	z-index: 1001;
+	@include transition(all 0.5s ease);
+	//* display none for small screen
+	display: none;
+	@include breakpoint(lg) {
+		//* display block for large screen
+		//* visible follow cursor
+		display: block;
+	}
+	//* follow cursor inner options
+	@include breakpoint(lg) {
+		.cursor {
+			//* general setting for all child elements
+			&__follow,
+			&__inner {
+				position: relative;
+				display: block;
+			}
+			//* follow cursor inner svg circle
+			&__inner {
+				svg {
+					fill: none;
+					//* stroke color
+					stroke: rgba(255, 255, 255, 1);
+					stroke-width: 2px;
+					stroke-linejoin: miter;
+					stroke-linecap: round;
+					mix-blend-mode: exclusion;
+					transform-origin: 50%;
+					will-change: transform;
+					display: block;
+				}
+			}
+		}
+		//* END `cursor - follow, inner and svg`
+	}
+}
+//* END `cursor`

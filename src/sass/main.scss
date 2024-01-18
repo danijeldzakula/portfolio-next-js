@@ -1,0 +1,181 @@
+//* base
+@import './base/reset';
+@import './base/typography';
+//* helpers
+@import './helpers/config';
+@import './helpers/keyframes';
+@import './helpers/mixins';
+
+$css4: true;
+$compatibility: true;
+$variables: (
+	--color-light: rgb(255, 255, 255),
+	--color-dark: rgb(0, 0, 0),
+	--background-light: rgb(255, 255, 255),
+	--background-dark: rgb(0, 0, 0)
+);
+//* container viewport & breakpoints
+$viewport: (
+	view: (xs: 360px, sm: 432px, md: 648px, umd: 846px, lg: 972px, ulg: 1026px, xl: 1116px, uxl: 1296px),
+	break: (xs: 400px, sm: 480px, md: 720px, umd: 940px, lg: 1080px, ulg: 1140px, xl: 1240px, uxl: 1440px)
+);
+
+/*
+-------------------------
+400px
+@include breakpoint(xs) {
+-------------------------
+*************************
+-------------------------
+480px
+@include breakpoint(sm) {
+-------------------------
+*************************
+-------------------------
+720px
+@include breakpoint(md) {
+-------------------------
+*************************
+-------------------------
+940px
+@include breakpoint(umd) {
+-------------------------
+*************************
+-------------------------
+1080px
+@include breakpoint(lg) {
+-------------------------
+*************************
+-------------------------
+1140px
+@include breakpoint(ulg) {
+-------------------------
+*************************
+-------------------------
+1240px
+@include breakpoint(ex) {
+-------------------------
+*************************
+-------------------------
+1440px
+@include breakpoint(uex) {
+-------------------------
+*/
+
+$font: (
+	typo: (1: 9.6rem, 2: 6.0rem, 3: 4.8rem, 4: 3.4rem, 5: 2.4rem, 6: 2.0rem, p: 1.6rem, small: 1.2rem),
+	weight: (1: 100, 2: 200, 3: 300, 4: 400, 5: 500, 6: 600, 7: 700, 8: 800, 9:900)
+);
+
+@if ($css4) {
+	:root {
+		--background-gradient-start: #6a11cb;
+		--background-gradient-end: #2575fc;
+
+		--font-ratio: 1.618;
+		--font-base: 1.6rem;
+
+		--spacing: 10px;
+		--space1: var(--spacing);
+		--space2: calc(var(--spacing) * 2);
+		--space3: calc(var(--spacing) * 3);
+		--space4: calc(var(--spacing) * 4);
+		--space5: calc(var(--spacing) * 5);
+		--space6: calc(var(--spacing) * 6);
+		--space7: calc(var(--spacing) * 7);
+		--space8: calc(var(--spacing) * 8);
+
+		@each $variable, $value in $variables {
+			#{$variable}: $value;
+		}
+
+		@each $name, $size in $viewport {
+			@if type-of($size) == "map" {
+				@each $subname, $subsize in $size {
+					--size-#{$name}-#{$subname}: #{$subsize};
+				}
+			}
+		}
+
+		@each $name, $size in $font {
+			@if type-of($size) == "map" {
+				@each $subname, $subsize in $size {
+					--font-#{$name}-#{$subname}: #{$subsize};
+				}
+			}
+		}
+		--font-opensans: 'Open Sans', sans-serif;
+		--font-condensed: "Open Sans Condensed", sans-serif;
+		--font-playfair: 'Playfair Display', sans-serif;
+		--font-montserrat: 'Montserrat', sans-serif;
+		--font-merriweather: 'Merriweather', 'Times New Roman', sans-serif;
+		--font-quattrocento: 'Quattrocento Sans', sans-serif;
+		--font-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+		--animation-cubic: cubic-bezier(0, 0, 0.2, 1);
+	}
+}
+
+@function var($variable) {
+	@if ($css4) {
+		@return unquote('var(' + $variable + ')');
+	} @else {
+		@return map-get($variables, $variable);
+	}
+}
+
+@mixin css4 {
+	@if ($css4) {
+		$css4-backup: $css4;
+		@if ($compatibility) {
+			$css4: false !global;
+			@content;
+		}
+		$css4: true !global;
+		@content;
+		$css4: $css4-backup;
+	} @else {
+		@content;
+	}
+}
+/*
+body::-webkit-scrollbar {
+	width: 0;
+	background: transparent;
+}
+
+::-webkit-scrollbar {
+	width: 0;
+	display: none;
+	-webkit-appearance: none;
+}
+
+::-webkit-scrollbar-thumb {
+	background: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+@-moz-document url-prefix() {
+	html {
+		scrollbar-width: none;
+	}
+}
+*/
+::selection {
+	background-color: rgb(63, 63, 63);
+	color: rgb(255, 255, 255);
+}
+
+*::selection {
+	background-color: rgb(63, 63, 63);
+	color: rgb(255, 255, 255);
+}
+
+::-moz-selection {
+	background-color: rgb(63, 63, 63);
+	color: rgb(255, 255, 255);
+}

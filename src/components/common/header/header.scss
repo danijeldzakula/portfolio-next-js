@@ -1,0 +1,296 @@
+@import '../../../sass/helpers/mixins';
+//* global header
+.gl__header {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	width: 100%;
+	min-height: 60px;
+	line-height: 60px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	z-index: 998;
+	overflow: hidden;
+	//* padding top for large screen
+	@include breakpoint(lg) {
+		padding-top: 30px;
+		padding-bottom: 0;
+	}
+	//* pseudo of global header
+	&:before,
+	&:after {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		clear: both;
+		display: block;
+		content: '';
+	}
+	//* gradient of global header for small screen - without active on navigation open
+	&:before {
+		height: 100%;
+		opacity: 0.5;
+		transform: translateY(0);
+		will-change: transform, opacity, background-image;
+		//@include linear-gradient(to right, rgb(106, 17, 203), rgb(37, 117, 252));
+		@include transition(transform 0.5s var(--animation-cubic), opacity 0.5s var(--animation-cubic));
+		z-index: 0;
+		@include breakpoint(lg) {
+			height: 0;
+			bottom: inherit;
+		}
+	}
+	//* background of global header for gradient pseudo
+	&:after {
+		height: 100%;
+		opacity: 1;
+		transform: translateY(0);
+		will-change: transform, opacity, background-color;
+		//background-color: rgba($color: #000000, $alpha: 0.85);
+		@include transition(transform 0.5s var(--animation-cubic), opacity 0.5s var(--animation-cubic));
+		z-index: -1;
+		@include breakpoint(lg) {
+			background-color: transparent;
+		}
+	}
+}
+//* END `global header`
+//* <h1> logo brand
+.logo__brand {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	left: 0;
+	//* target sizes
+	@include breakpoint(md) {
+		width: 70px;
+		height: 70px;
+		left: 40px;
+	}
+	//* home anchor event
+	.home__anchor {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		outline: 0;
+		//* global svg
+		svg {
+			display: block;
+			width: 100%;
+			height: 100%;
+			//* logo path
+			path {
+				fill: none;
+				stroke: none;
+				stroke-width: 2px;
+				stroke-linecap: round;
+				stroke-linejoin: miter;
+				stroke-opacity: 1;
+				will-change: stroke;
+				@include transition(stroke 0.5s linear);
+				//* hide word (D) - digital
+				&:nth-child(1) {
+					stroke: transparent;
+				}
+				//* show word (K) - creative
+				&:nth-child(2),
+				&:nth-child(3) {
+					stroke: rgb(255, 255, 255);
+				}
+			}
+		}
+	}
+	//* active navigation
+	&.isOpen {
+		.home__anchor {
+			svg {
+				path {
+					will-change: stroke;
+					@include transition(stroke 0.5s linear);
+					//* active show word (D) - digital
+					&:nth-child(1) {
+						stroke: rgb(255, 255, 255);
+					}
+					//* active hide word (K) - creative
+					&:nth-child(2),
+					&:nth-child(3) {
+						stroke: transparent;
+					}
+				}
+			}
+		}
+	}
+}
+//* END `logo brand`
+//* <button> menu trigger
+.nav__toggle {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	//* target sizes
+	@include breakpoint(md) {
+		width: 70px;
+		height: 70px;
+		right: 40px;
+	}
+	//* <span> icon positon absolute
+	.icon {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-clip: padding-box;
+		border-radius: 50%;
+		//* <span> icon selected twice
+		&--open,
+		&--close {
+			//* <svg> position absolute
+			svg {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin: auto;
+				@include transition(all 0.5s var(--animation-cubic));
+				//* open (=) icon
+				polygon {
+					//* icon (=) background fill
+					fill: rgb(255, 255, 255);
+					stroke: none;
+					will-change: transform;
+					@include transition(transform 0.5s var(--animation-cubic));
+					//* polygon line top
+					&:nth-child(1) {
+						transform: translateX(0);
+					}
+					//* polygon line bottom
+					&:nth-child(2) {
+						transform: translateX(0);
+					}
+				}
+				//* close (x) icon
+				line {
+					//* icon (x) background stroke
+					stroke: rgb(255, 255, 255);
+					fill: none;
+				}
+			}
+		}
+		//* END `icon (open - close)`
+
+		//* <span> icon open (=)
+		&--open {
+			opacity: 0;
+			visibility: hidden;
+			& svg {
+				width: 30px;
+				height: 30px;
+			}
+		}
+		//* <span> icon close (x)
+		&--close {
+			opacity: 0;
+			visibility: hidden;
+			& svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+	//* hover icon open (=)
+	&:hover {
+		.icon {
+			&--open {
+				svg {
+					polygon {
+						//* top line translateX (horizontal) 6px
+						&:nth-child(1) {
+							transform: translateX(6px);
+						}
+						//* bottom line translateX (horizontal) -6px
+						&:nth-child(2) {
+							transform: translateX(-6px);
+						}
+					}
+				}
+			}
+		}
+	}
+	//* open menu - active
+	&.isOpen {
+		.icon {
+			//* <span> icon open (=) / hide
+			&--open {
+				opacity: 0;
+				visibility: hidden;
+				will-change: visibility, opacity;
+				@include transition(all 0.3s var(--animation-cubic));
+			}
+			//* <span> icon close (x) / show
+			&--close {
+				opacity: 1;
+				visibility: visible;
+				will-change: visibility, opacity;
+				@include transition(all 0.3s var(--animation-cubic));
+				& svg {
+					transform: rotate(-90deg);
+					@include transition(all 0.3s var(--animation-cubic));
+				}
+			}
+		}
+	}
+	//* close menu - inactive
+	&.isClose {
+		.icon {
+			//* <span> icon open (=) / show
+			&--open {
+				opacity: 1;
+				visibility: visible;
+				will-change: visibility, opacity;
+				@include transition(all 0.3s var(--animation-cubic));
+			}
+			//* <span> icon close (x) / hide
+			&--close {
+				opacity: 0;
+				visibility: hidden;
+				will-change: visibility, opacity;
+				@include transition(all 0.3s var(--animation-cubic));
+			}
+		}
+	}
+}
+//* END `menu trigger`
+//* Animation on open Navigation
+body.active {
+	.gl__header {
+		&::before,
+		&::after {
+			transform: translateY(-100%);
+		}
+		&::before {
+			opacity: 0;
+		}
+		&::after {
+			opacity: 0;
+		}
+	}
+}
+//* END `body - active`

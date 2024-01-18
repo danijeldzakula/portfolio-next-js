@@ -1,0 +1,85 @@
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-ms-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
+@include keyframes(trackballslide) {
+	0% {
+		opacity: 1;
+		transform: translateY(0) scaleY(1);
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-40px) scaleY(2);
+	}
+}
+
+@include keyframes(run) {
+	0% {
+		left: 0;
+	}
+	25% {
+		left: 25%;
+		opacity: .3;
+	}
+	40% {
+		left: 75%;
+		opacity: .9;
+	}
+	50% {
+		right: 60%;
+		opacity: .7;
+	}
+	75% {
+		left: 50%;
+	}
+	100% {
+		left: calc(100% - 7px);
+	}
+}
+
+@include keyframes(scroll) {
+	from {
+		transform: translateY(-30px);
+	}
+}
+
+@include keyframes(fadeIn) {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@include keyframes(textBlur) {
+	0% {
+		filter: blur(0px);
+	}
+	100% {
+		filter: blur(4px);
+	}
+}
+
+@include keyframes(blinkTextCursor) {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}

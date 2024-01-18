@@ -1,0 +1,310 @@
+@import '../../../sass/helpers/mixins';
+//* Global Navigation
+//* <nav>
+.gl__nav {
+	//* default nav (close)
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	//* Pointer event none on inactive navigation
+	pointer-events: none;
+	opacity: 0;
+	//* Z-INDEX Navigation inactive
+	z-index: -10;
+	will-change: opacity;
+	@include transition(all .5s var(--animation-cubic));
+
+	//* navigation activate overlay (navigation open)
+	&.isOpen {
+		//* Pointer event active on open navigation
+		pointer-events: auto;
+		opacity: 1;
+		//* Z-INDEX Navigation active
+		z-index: 997;
+	}
+
+	//* Navigation Bubble Overlay (Default) - inactive
+	.nav__overlay {
+		//* overlay default (close)
+		position: absolute;
+		top: -300vw;
+		right: -300vw;
+		width: 600vw;
+		height: 600vw;
+		border-radius: 50%;
+		background-color: rgba(0, 0, 0, 1);
+		transform-origin: center;
+		z-index: 10;
+		//* scale for no visible
+		transform: scale(0, 0);
+		will-change: transform;
+		@include transition(transform .7s ease-in, background-color .3s ease);
+	}
+
+	//* Navigation Bubble Overlay - active
+	&.isOpen {
+		.nav__overlay {
+			//* scale for visible
+			transform: scale(1, 1);
+			&.isOpacity {
+				//* overlay opacity on hover nav anchors
+				background-color: rgba(0, 0, 0, 1);
+			}
+		}
+	}
+	//* END `global navigation overlay`
+
+	//* nav menu default (close)
+	//* <ul>
+	.menu {
+		position: relative;
+		width: auto;
+		max-width: 100%;
+		padding: 0;
+		list-style-type: none;
+		opacity: 0;
+		transform: translateY(30px);
+		will-change: transform, opacity;
+		@include transition(all .5s var(--animation-cubic));
+		z-index: 12;
+
+		//* menu item navigation (default)
+		//* <a href>
+		.menu__item {
+			//* style nav anchors
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			padding: 14px 20px;
+			color: #999;
+			letter-spacing: .1em;
+			font-size: 18px;
+			font-family: var(--font-merriweather);
+			font-weight: var(--font-weight4);
+			width: 100%;
+			text-align: center;
+			//* Z-INDEX - anchors <a href>
+			z-index: 5;
+			@include transition(all 0.5s var(--animation-cubic), width 0s);
+
+			@media only screen and (orientation: portrait) {
+				font-size: 22px;
+			}
+			@media only screen and (orientation: landscape) {
+				font-size: 18px;
+			}
+			@include breakpoint(md) {
+				width: auto;
+				display: inline-flex;
+				width: calc(100% / 3);
+				padding: 14px 30px;
+				font-size: 22px;
+			}
+			@include breakpoint(md) {
+				@media only screen and (orientation: portrait) {
+					font-size: 24px;
+				}
+				@media only screen and (orientation: landscape) {
+					font-size: 24px;
+				}
+			}
+			@include breakpoint(lg) {
+				padding: 16px 40px;
+				font-size: 26px;
+			}
+			@include breakpoint(uxl) {
+				padding: 18px 50px;
+				font-size: 28px;
+			}
+			//* menu item navigation (hover)
+			&:hover,
+			&.active {
+				color: white;
+			}
+		}
+
+		//* menu item navigation (hover)
+		&:hover .menu__item:not(:hover) {
+			//* hover  :not(:hover) nav anchors
+			opacity: 0.3;
+		}
+	}
+
+	//* nav menu - active
+	&.isOpen {
+		//* menu (open)
+		.menu {
+			opacity: 1;
+			transform: translateY(20px);
+			will-change: transform, opacity;
+			@include transition(all 0.5s 0.5s ease);
+			@include breakpoint(md) {
+				transform: translateY(0);
+			}
+		}
+	}
+}
+
+//* follow cursor on nav anchors
+.gl__nav {
+	//*
+	.menu__active-follow {
+		position: absolute;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		height: 7px;
+		z-index: -1;
+		//* dot style (default)
+		.menu__dot {
+			position: absolute;
+			display: block;
+			width: 7px;
+			height: 7px;
+			background-color: white;
+			border-radius: 25px;
+			animation: run 2s linear infinite alternate;
+		}
+	}
+
+	//* follow use state of menu item anchors
+	.menu__item {
+		& ~ .menu__active-follow {
+			@include transition(all 0.5s var(--animation-cubic));
+		}
+
+		//* HOME - anchors
+		&--home {
+			//* home active dot
+			&.active {
+				@media only screen and (orientation: portrait) {
+					& ~ .menu__active-follow {
+						top: 56px;
+						bottom: inherit;
+					}
+				}
+				@media only screen and (orientation: landscape) {
+					& ~ .menu__active-follow {
+						top: 50px;
+						bottom: inherit;
+						@include breakpoint(md) {
+							top: inherit;
+							bottom: 0;
+						}
+					}
+				}
+			}
+		}
+		//* GALLERY - anchors
+		&--gallery {
+			//* gallery active dot
+			&.active {
+				@media only screen and (orientation: portrait) {
+					& ~ .menu__active-follow {
+						top: calc(59.5px * 2);
+						@include breakpoint(md) {
+							top: inherit;
+							bottom: 0;
+						}
+					}
+				}
+				@media only screen and (orientation: landscape) {
+					& ~ .menu__active-follow {
+						top: calc(53.5px * 2);
+						@include breakpoint(md) {
+							top: inherit;
+							bottom: 0;
+						}
+					}
+				}
+			}
+		}
+		//* WORK - acnhors
+		&--work {
+			//* work active dot
+			&.active {
+				& ~ .menu__active-follow {
+					top: inherit;
+					bottom: 0;
+				}
+			}
+		}
+
+		//* Hover anchors link
+		@include breakpoint(md) {
+			& ~ .menu__active-follow {
+				width: calc(100% / 3);
+			}
+			&:hover {
+				& ~ .menu__active-follow {
+					bottom: 0;
+				}
+			}
+			//* HOME active hover dot
+			&--home {
+				&.active {
+					& ~ .menu__active-follow {
+						left: 0;
+					}
+				}
+				&:hover {
+					& ~ .menu__active-follow {
+						left: 0 !important;
+					}
+				}
+			}
+			//* GALLERY active hover dot
+			&--gallery {
+				&.active {
+					& ~ .menu__active-follow {
+						left: calc(100% / 3);
+					}
+				}
+				&:hover {
+					& ~ .menu__active-follow {
+						left: calc(100% / 3) !important;
+					}
+				}
+			}
+			//* WORK active hover dot
+			&--work {
+				&.active {
+					& ~ .menu__active-follow {
+						left: calc(100% / 3 * 2);
+					}
+				}
+				&:hover {
+					& ~ .menu__active-follow {
+						left: calc(100% / 3 * 2) !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+//* toggle theme animation on active navigation
+.gl__nav {
+	.toggle__theme {
+		opacity: 0;
+		will-change: transform, opacity;
+		transform: translateY(20px);
+		@include transition(all 0.5s ease);
+	}
+	&.isOpen {
+		& .toggle__theme {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+}

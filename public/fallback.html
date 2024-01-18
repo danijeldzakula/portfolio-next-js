@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="True" name="HandheldFriendly" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=EDGE" />
+    <!-- Meta Tags -->
+    <meta name="author" content="Danijel Dzakula">
+    <meta name="description" content="Web site created using create-react-app" />
+    <!-- Theme color -->
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" href="./android-chrome-192x192.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <!-- Default Title -->
+    <title>Web Digital Creative | Home</title>
+    <!-- Primary Styles Inline -->
+    <style type="text/css">
+        html, body {
+            overflow-x: hidden !important;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+    <style type="text/css">
+        html, body, div, span, iframe,
+        h1, h2, h3, h4, h5, h6, p,
+        a, em, font, img, i, ul, li, main {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+        :focus {
+            outline: 0;
+        }
+        svg:not(:root) {
+            overflow: hidden;
+        }
+        html {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+            *, *:before, *:after {
+            -webkit-box-sizing: inherit;
+            -moz-box-sizing: inherit;
+            box-sizing: inherit;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #ffffff;
+            text-align: center;
+            background-color: #202020;
+        }
+        .pt-1 {
+            padding-top: 10px;
+        }
+        .pt-2 {
+            padding-top: 20px;
+        }
+        .pt-3 {
+            padding-top: 30px;
+        }
+
+        .pb-1 {
+            padding-bottom: 10px;
+        }
+        .pb-2 {
+            padding-bottom: 20px;
+        }
+        .pb-3 {
+            padding-bottom: 30px;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;    
+        }
+        .horizontal-separator {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            height: 1px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 40px;
+            background-color: #333;
+        }
+        .table {
+            display: table;
+            width: 100%;
+            height: 100%;
+        }
+        .table-cell {
+            display: table-cell;
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        html, body {
+            height: 100%;
+            min-height: 100%;
+        }     
+        .__fallback {
+            min-height: 100%;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-right: 10px;
+            padding-left: 10px;
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+        }
+        .container:before,
+        .container:after,
+        .group:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            clear: both;
+            height: 0;
+            width: 0;
+            content: '.';
+        }
+        @media (min-width: 480px) {
+            .container {
+                max-width: 432px;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+        }
+        @media (min-width: 720px) {
+            .container {
+                max-width: 648px;
+                padding-right: 20px;
+                padding-left: 20px;     
+            }
+        }
+        @media (min-width: 1080px) {
+            .container {
+                max-width: 972px;
+                padding-right: 25px;
+                padding-left: 25px;     
+            }
+        }
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1296px;
+                padding-right: 30px;
+                padding-left: 30px;     
+            }
+        }
+        /* header */
+        .fallback__header {
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            min-height: 90px;
+            line-height: 90px;
+            z-index: 10;
+            padding: 10px 0;
+        }
+        .fallback__header:after {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            clear: both;
+            display: block;
+            content: '';
+            height: 1px;
+            background-color: #333;
+            margin: auto;
+        }     
+        .fallback__header .logo__brand {
+            position: relative;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: 70px;
+            height: 70px;
+            display: block;
+            margin: auto;
+            /*float: left;*/
+        }
+        .fallback__header h2 {
+            font-size: 22px;
+            font-weight: 400;
+            float: right;
+        }
+        .fallback__header .logo__svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+        svg path {
+            fill: none;
+            stroke: black;
+            stroke-width: 2px;
+            stroke-linecap: round;
+            stroke-linejoin: miter;
+            stroke-opacity: 1;            
+        }
+        svg path:nth-child(1) {
+            stroke: none;
+        }
+        svg path:nth-child(2) {
+            stroke: white;
+        }
+        svg path:nth-child(3) {
+            stroke: white;
+        }        
+        @media (min-width: 480px) {
+            .fallback__header h2 {
+                font-size: 26px;
+                font-weight: 400;
+            }
+        }
+        @media (min-width: 720px) {
+            .fallback__header h2 {
+                font-size: 28px;
+                font-weight: 400;
+            }
+        }
+        @media (min-width: 1080px) {
+            .fallback__header {
+                position: fixed;
+            }            
+            .fallback__header h2 {
+                font-size: 30px;
+                font-weight: 400;
+                margin: auto;
+                z-index: 1;
+            }
+        }
+        @media (min-width: 1440px) {
+            .fallback__header h2 {
+                font-size: 32px;
+                font-weight: 400;
+            }
+        }
+        /* end header */
+        /* footer */
+        .fallback__footer {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            min-height: 90px;
+            padding: 15px 10px;
+            background: transparent;
+            z-index: 100;
+        }
+        .fallback__footer:before {
+            position: absolute;
+            right: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            clear: both;
+            display: block;
+            content: '';
+            height: 1px;
+            background-color: #333;
+            margin: auto;            
+        }           
+        .fallback__footer p {
+            font-size: 12px;
+            text-transform: uppercase;
+            word-spacing: 0.1em;
+            letter-spacing: 0.1em;
+            color: #c5c5c5;
+            text-align: center;
+        }
+        @media (min-width: 480px) {
+            .fallback__footer {
+                line-height: 90px;
+                padding: 0;
+            }
+        }
+        @media (min-width: 720px) {
+            .fallback__footer p {
+                font-size: 14px;
+            }
+        }
+        @media (min-width: 1080px) {
+            .fallback__footer {
+                position: fixed;
+            }            
+            .fallback__footer p {
+                font-size: 16px;
+            }
+        }
+        @media (min-width: 1440px) {
+        }
+        /* end footer */
+        /* main */
+        .fallback__content {
+            position: relative;
+            padding: 50px 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            transform-origin: 0 0 0;
+            backface-visibility: hidden;
+            background-image: url("https://www.webdigitalcreative.com/static/media/waves_dark.fdec938f.jpg");
+        }
+        .fallback__content h1 {
+            font-size: 26px;
+            font-weight: 100;
+            margin-bottom: 20px;
+            line-height: 1.25;
+            word-spacing: 0.1em;
+            letter-spacing: 0.1em;  
+        }
+        .fallback__content p {
+            font-size: 12px;
+            text-transform: uppercase;
+            word-spacing: 0.1em;
+            letter-spacing: 0.1em;
+            color: #c5c5c5;
+            margin-bottom: 0;   
+            font-weight: 400;
+        }
+        .content__item {
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 25vh;
+            min-height: 160px;
+        }
+        .content__item a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            margin: auto;
+            height: 100%;
+            padding: 10px;
+            text-align: center;
+            background-color: transparent;  
+            text-decoration: none;
+            z-index: 3;
+            border-radius: 5px;
+            transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
+        }
+        .content__item .text {
+            display: block;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 12px;
+        }
+        .content__item:nth-child(1){
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        .content__item:nth-child(2){
+            border-bottom: 1px solid #333;
+        }
+        .content__item:nth-child(3){
+            border-right: 1px solid #333;
+        }
+        .content__item .icon {
+            display: table;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            z-index: -1;    
+        }
+        .content__item a .icon i {
+            font-size: 46px;
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            display: table-cell;
+            color: #999;
+            transition: color 0.5s cubic-bezier(0, 0, 0.2, 1);    
+        }
+        .content__item--chrome a:hover .icon i {
+            color: #ffcd46;
+        }
+        .content__item--mozilla a:hover .icon i {
+            color: #f66800;
+        }      
+        .content__item--safari a:hover .icon i {
+            color: #00cdf2;
+        }  
+        .content__item--opera a:hover .icon i {
+            color: #fd1a2c;
+        }
+        @media (min-width: 480px) {
+            .fallback__content h1 {
+                font-size: 28px;
+            }
+            .fallback__content p {
+                font-size: 14px;
+            }
+            .content__item a .icon i {
+                font-size: 48px;
+            }
+            .content__item a {
+                padding-top: 15px;
+            }
+        }
+        @media (min-width: 720px) {
+            .fallback__content {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .fallback__content {
+                padding-top: 90px;
+                padding-bottom: 90px;
+            }   
+            .fallback__content h1 {
+                font-size: 30px;
+            }
+            .fallback__content p {
+                font-size: 16px;
+            }
+            .content__item a .icon i {
+                font-size: 56px;
+            }
+            .content__item a {
+                padding-top: 20px;
+            }   
+
+        }
+        @media (min-width: 1080px) {
+            .fallback__content {
+                position: absolute;
+                min-height: 100vh;
+            }               
+            .content__item {
+                width: 25%;
+            }   
+            .content__item:nth-child(1){
+                border-right: 1px solid #333;
+                border-bottom: 0;
+            }
+            .content__item:nth-child(2){
+                border-bottom: 0;
+                border-right: 1px solid #333;
+            }
+            .content__item:nth-child(3){
+                border-right: 1px solid #333;
+            }                        
+            .fallback__content h1 {
+                font-size: 36px;
+            }
+            .content__item a .icon i {
+                font-size: 64px;
+            }
+            .content__item a {
+                padding-top: 25px;
+            }   
+        }
+        @media (min-width: 1440px) {
+            .fallback__content h1 {
+                font-size: 42px;
+            }
+            .content__item a .icon i {
+                font-size: 82px;
+            }
+            .content__item a {
+                padding-top: 30px;
+            }   
+        }
+        /* end main */         
+    </style>
+</head>
+<body>
+    <div class="__fallback">
+        <header class="fallback__header">
+            <div class="container">
+                <div class="logo__brand">
+                    <span class="logo__svg">
+                        <svg width="100%" height="100%" viewBox="0 -1 50 42">
+                            <path d="M10 0 H10 V0 L31 20 L10 40" ></path>	
+                            <path d="M12.5 30 H12.5 V20 10 L12.5 10" ></path>
+                            <path d="M40 40 H40 V40 L19 20 L40 0 V0" ></path>		
+                        </svg>	       
+                    </span>             
+                </div>
+                <h2 style="display: none;">Web Digital Creative</h2>
+            </div>
+        </header>
+        <main class="fallback__content">
+            <div class="table">
+                <div class="table-cell">
+                    <div class="container">
+                        <div class="group pt-3 pb-3">
+                            <h1>Your Browser is no longer supported</h1>
+                            <p>To open this website, please upgrade your browser</p>  
+                        </div>
+                        <div class="horizontal-separator"></div>   
+
+                        <div class="group pt-3 pb-3">       
+                            <div class="content__item content__item--chrome">
+                                <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">
+                                    <span class="text">Google Chrome</span>
+                                    <span class="icon">
+                                        <i class="fab fa-chrome"></i>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="content__item content__item--mozilla">
+                                <a href="https://www.mozilla.org/firefox/new/" target="_blank">
+                                    <span class="text">Mozilla Firefox</span>
+                                    <span class="icon">
+                                        <i class="fab fa-firefox"></i>
+                                    </span> 
+                                </a>                
+                            </div>                    
+                            <div class="content__item content__item--safari">
+                                <a href="https://support.apple.com/HT204416" target="_blank">
+                                    <span class="text">Apple Safari</span>
+                                    <span class="icon">
+                                        <i class="fab fa-safari"></i>
+                                    </span> 
+                                </a>                
+                            </div>
+                            <div class="content__item content__item--opera">
+                                <a href="https://www.opera.com/download" target="_blank">
+                                    <span class="text">Opera</span>
+                                    <span class="icon">
+                                        <i class="fab fa-opera"></i>
+                                    </span>    
+                                </a>             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="fallback__footer flex-center">
+            <p>Copyright <script>document.write(new Date().getFullYear())</script> &copy;Web Digital Creative. All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+</html>
